@@ -272,7 +272,16 @@ QueryBuilder.extend({
                             }
                             else {
                                 if (typeof v === 'string') {
-                                    v = '\''+ v +'\'';
+                                    if (ope.multiple) {
+                                        var words = v.split(',');
+                                        var tuple = [];
+                                        words.forEach(function (item) {
+                                            tuple.push(quoteString(item.trim()));
+                                        });
+                                        v = tuple.join(',');
+                                    } else {
+                                        v = quoteString(v);
+                                    }
                                 }
 
                                 value+= v;
@@ -298,6 +307,10 @@ QueryBuilder.extend({
                 sql: sql
             };
         }
+    },
+
+    quoteString: function (value) {
+        return '\'' + value + '\'';
     },
 
     /**
