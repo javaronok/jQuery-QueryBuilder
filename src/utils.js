@@ -104,3 +104,12 @@ function escapeString(value) {
 function escapeRegExp(str) {
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 }
+
+/**
+ * Quote value string
+ * @param value
+ * @returns {string}
+ */
+function quoteString(value) {
+    return '\'' + value + '\'';
+}

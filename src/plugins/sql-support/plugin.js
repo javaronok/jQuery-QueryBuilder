@@ -201,11 +201,6 @@ QueryBuilder.defaults({
 // PUBLIC METHODS
 // ===============================
 QueryBuilder.extend({
-
-    quoteString: function (value) {
-        return '\'' + value + '\'';
-    },
-
     /**
      * Get rules as SQL query
      * @param stmt {false|string} use prepared statements - false, 'question_mark' or 'numbered'
