@@ -1043,6 +1043,7 @@ QueryBuilder.prototype.getRules = function() {
                 type: model.filter.type,
                 input: model.filter.input,
                 operator: model.operator.type,
+                function: model.function,
                 value: value
             };
 
@@ -2287,6 +2288,15 @@ function escapeRegExp(str) {
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 }
 
+/**
+ * Quote value string
+ * @param value
+ * @returns {string}
+ */
+function quoteString(value) {
+    return '\'' + value + '\'';
+}
+
 $.fn.queryBuilder = function(option) {
     if (this.length > 1) {
         error('Unable to initialize on multiple target');
@@ -3361,7 +3371,16 @@ QueryBuilder.extend({
                             }
                             else {
                                 if (typeof v === 'string') {
-                                    v = '\''+ v +'\'';
+                                    if (ope.multiple) {
+                                        var words = v.split(',');
+                                        var tuple = [];
+                                        words.forEach(function (item) {
+                                            tuple.push(quoteString(item.trim()));
+                                        });
+                                        v = tuple.join(',');
+                                    } else {
+                                        v = quoteString(v);
+                                    }
                                 }
 
                                 value+= v;
