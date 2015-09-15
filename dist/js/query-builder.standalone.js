@@ -1248,6 +1248,8 @@ QueryBuilder.prototype.setRules = function(data) {
                 model.operator = that.getOperatorByType(item.operator);
                 model.flags = that.parseRuleFlags(item);
 
+                model.function = item.function;
+
                 if (model.operator.nb_inputs !== 0 && item.value !== undefined) {
                     model.value = item.value;
                 }
