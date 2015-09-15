@@ -149,6 +149,7 @@ QueryBuilder.prototype.getRules = function() {
                 type: model.filter.type,
                 input: model.filter.input,
                 operator: model.operator.type,
+                function: model.function,
                 value: value
             };
 
